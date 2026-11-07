@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f1e9">
+  <meta name="description" content="러시아어 알파벳과 단어를 배우는 학습 앱">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>러시아어 첫걸음</title>
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">RUSSIAN STUDY</p><h1>러시아어 첫걸음</h1></div>
+    <button id="homeBtn" class="icon-btn" aria-label="처음으로">⌂</button>
+  </header>
+  <main id="app" class="shell">
+    <section id="homeScreen" class="screen">
+      <div class="hero">
+        <span class="hero-mark">АБВ</span>
+        <div><p class="eyebrow">오늘의 학습</p><h2>조금씩, 정확하게.</h2><p>알파벳부터 실제 러시아어 단어까지 배워 보자.</p></div>
+      </div>
+      <div class="progress-card">
+        <div class="row spread"><strong>전체 학습 진행</strong><span id="progressText">0 / 6 단원</span></div>
+        <div class="progress"><i id="progressBar"></i></div>
+      </div>
+      <div id="unitList" class="unit-list"></div>
+      <div class="home-actions">
+        <button class="secondary" data-action="finalReview">전체 복습</button>
+        <button class="secondary" data-action="alphabetDict">알파벳 사전</button>
+        <button class="secondary" data-action="wordDict">단어 사전</button>
+      </div>
+    </section>
+
+    <section id="learnScreen" class="screen hidden">
+      <button class="back-link" data-action="home">← 단원 목록</button>
+      <div class="section-head"><div><p class="eyebrow" id="unitEyebrow">UNIT 1</p><h2 id="unitTitle">알파벳 익히기</h2></div><span id="stepPill" class="pill">1 / 3</span></div>
+      <div class="tabs" id="lessonTabs"></div>
+      <div id="lessonContent"></div>
+      <div class="bottom-actions"><button id="prevBtn" class="secondary">이전</button><button id="nextBtn" class="primary">다음</button></div>
+    </section>
+
+    <section id="quizScreen" class="screen hidden">
+      <button class="back-link" data-action="home">← 단원 목록</button>
+      <div class="section-head"><div><p class="eyebrow" id="quizEyebrow">UNIT 1 QUIZ</p><h2 id="quizTitle">발음 고르기</h2></div><span id="quizCount" class="pill">1 / 10</span></div>
+      <div class="quiz-progress"><i id="quizProgressBar"></i></div>
+      <div id="quizContent"></div>
+      <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+      <div class="bottom-actions"><button id="quizNext" class="primary" disabled>정답 확인 후 다음</button></div>
+    </section>
+
+    <section id="dictScreen" class="screen hidden">
+      <button class="back-link" data-action="return">← 학습으로 돌아가기</button>
+      <div class="section-head"><div><p class="eyebrow">REFERENCE</p><h2 id="dictTitle">알파벳 사전</h2></div></div>
+      <div class="tabs"><button class="tab active" data-action="alphabetDict">알파벳</button><button class="tab" data-action="wordDict">단어</button></div>
+      <div id="dictContent" class="dict-list"></div>
+    </section>
+  </main>
+  <footer>러시아어 발음은 학습용 표기이며 실제 발음과 차이가 있을 수 있어요.</footer>
+  <script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(console.warn));
+    }
+  </script>
+</body>
+</html>
